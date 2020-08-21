@@ -69,9 +69,11 @@ class Timer extends React.Component {
 
   render() {
     return (
-      <View>
-        <Text>{this.state.isSession === true ? "Session" : "Break"}</Text>
-        <Text>
+      <View style={styles.container}>
+        <Text style={styles.textSession}>
+          {this.state.isSession === true ? "Session" : "Break"}
+        </Text>
+        <Text style={styles.textSession}>
           <Text>{this.props.timerMinute}</Text>
           <Text> : </Text>
           <Text>
@@ -82,16 +84,74 @@ class Timer extends React.Component {
               : this.state.timerSecond}
           </Text>
         </Text>
-        <Button
-          onPress={this.play}
-          disabled={this.props.isPlay === true ? true : false}
-          title="Play"
-        ></Button>
-        <Button onPress={this.stop} title="Stop" />
-        <Button onPress={this.reset} title="Restart" />
+        <View style={styles.toView}>
+          <TouchableOpacity
+            onPress={this.play}
+            disabled={this.props.isPlay === true ? true : false}
+            style={
+              this.props.isPlay === false
+                ? styles.toStyleClickable
+                : styles.toStyleNot
+            }
+          >
+            <Text style={styles.text}>Play</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={this.stop}
+            style={
+              this.props.isPlay === true
+                ? styles.toStyleClickable
+                : styles.toStyleNot
+            }
+          >
+            <Text style={styles.text}>Stop</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={this.reset}
+            style={styles.toStyleClickable}
+          >
+            <Text style={styles.text}>Restart</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  toStyleClickable: {
+    backgroundColor: "#133dbd",
+    padding: 10,
+    margin: 10,
+    height: 45,
+    width: 100,
+  },
+  toStyleNot: {
+    backgroundColor: "gray",
+    padding: 10,
+    margin: 10,
+    height: 45,
+    width: 100,
+  },
+  text: {
+    textAlign: "center",
+    textAlignVertical: "center",
+    color: "white",
+    fontSize: 17,
+  },
+  textSession: {
+    fontSize: 17,
+  },
+  toView: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+});
 
 export default Timer;

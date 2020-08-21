@@ -55,7 +55,10 @@ const App = () => {
 
   return (
     <View style={styles.container}>
-      <Text>Pomodoro Timer</Text>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>Pomodoro Timer</Text>
+      </View>
+
       <Session
         isPlay={isPlay}
         session={sessionDuration}
@@ -85,8 +88,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    paddingTop: 60,
+    // alignItems: "center",
+    // justifyContent: "center",
+  },
+  headerText: {
+    color: "black",
+    fontSize: 30,
+    textAlign: "center",
+  },
+  header: {
+    height: 70,
+    padding: 15,
   },
 });
 

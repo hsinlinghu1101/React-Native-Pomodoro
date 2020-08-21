@@ -20,30 +20,68 @@ class Session extends Component {
 
   render() {
     return (
-      <View>
-        <Text>Session Duration</Text>
-        <Text>{this.props.session}</Text>
-        <TouchableOpacity>
-          <Button
+      <View style={styles.container}>
+        <Text style={styles.sessionText}>Session Duration</Text>
+        <Text style={styles.sessionText}>{this.props.session}</Text>
+        <View style={styles.toView}>
+          <TouchableOpacity
+            style={
+              this.props.isPlay === false
+                ? styles.toStyleClickable
+                : styles.toStyleNot
+            }
             onPress={this.increaseSession}
             disabled={this.props.isPlay === true ? true : false}
-            title="+"
-          />
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Button
+          >
+            <Text style={styles.text}>+</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={
+              this.props.isPlay === false
+                ? styles.toStyleClickable
+                : styles.toStyleNot
+            }
             onPress={this.decreaseSession}
             disabled={this.props.isPlay === true ? true : false}
-            title="-"
-          />
-        </TouchableOpacity>
+          >
+            <Text style={styles.text}>–</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
 }
 
-// Session.propTypes = {
-//   isPlay: PropTypes.bool,
-// };
+const styles = StyleSheet.create({
+  container: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  toStyleClickable: {
+    backgroundColor: "#133dbd",
+    padding: 10,
+    margin: 10,
+    height: 38,
+    width: 28,
+  },
+  toStyleNot: {
+    backgroundColor: "gray",
+    padding: 10,
+    margin: 10,
+    height: 38,
+    width: 28,
+  },
+  text: {
+    textAlign: "center",
+    color: "white",
+  },
+  toView: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  sessionText: {
+    fontSize: 17,
+  },
+});
 
 export default Session;
