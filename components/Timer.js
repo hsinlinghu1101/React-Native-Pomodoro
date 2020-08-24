@@ -45,13 +45,13 @@ class Timer extends React.Component {
             });
 
             this.props.toggle(this.state.isSession);
-
             Vibration.vibrate(PATTERN);
           } else {
             this.setState({
               isSession: true,
             });
             this.props.toggle(this.state.isSession);
+            Vibration.vibrate(PATTERN);
           }
         } else {
           this.props.updateTimerMinute();
