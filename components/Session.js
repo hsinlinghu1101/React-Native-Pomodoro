@@ -5,17 +5,30 @@ import { StyleSheet, Text, View, Button, TouchableOpacity } from "react-native";
 // need to fix onLongPress
 
 class Session extends Component {
+  constructor() {
+    super();
+
+    this.timer = null;
+    this.stopTimer = this.stopTimer.bind(this);
+  }
+
+  stopTimer() {
+    clearTimeout(this.timer);
+  }
+
   increaseSession = () => {
     if (this.props.session === 60) {
       return;
     }
     this.props.increase();
+    this.timer = setTimeout(this.increaseSession, 125);
   };
   decreaseSession = () => {
     if (this.props.session === 1) {
       return;
     }
     this.props.decrease();
+    this.timer = setTimeout(this.decreaseSession, 125);
   };
 
   render() {
@@ -30,7 +43,8 @@ class Session extends Component {
                 ? styles.toStyleClickable
                 : styles.toStyleNot
             }
-            onPress={this.increaseSession}
+            onPressIn={this.increaseSession}
+            onPressOut={this.stopTimer}
             disabled={this.props.isPlay === true ? true : false}
           >
             <Text style={styles.text}>+</Text>
@@ -41,7 +55,8 @@ class Session extends Component {
                 ? styles.toStyleClickable
                 : styles.toStyleNot
             }
-            onPress={this.decreaseSession}
+            onPressIn={this.decreaseSession}
+            onPressOut={this.stopTimer}
             disabled={this.props.isPlay === true ? true : false}
           >
             <Text style={styles.text}>–</Text>
@@ -56,6 +71,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     justifyContent: "center",
+    margin: 20,
   },
   toStyleClickable: {
     backgroundColor: "#133dbd",

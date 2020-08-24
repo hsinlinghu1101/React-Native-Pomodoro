@@ -1,5 +1,13 @@
 import React from "react";
-import { StyleSheet, Text, View, Button, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  TouchableOpacity,
+  Vibration,
+  SafeAreaView,
+} from "react-native";
 
 class Timer extends React.Component {
   constructor() {
@@ -20,6 +28,14 @@ class Timer extends React.Component {
   };
 
   decreaseTimer = () => {
+    const HALF_SECOND_IN_MS = 500;
+
+    const PATTERN = [
+      1 * HALF_SECOND_IN_MS,
+      2 * HALF_SECOND_IN_MS,
+      3 * HALF_SECOND_IN_MS,
+    ];
+
     switch (this.state.timerSecond) {
       case 0:
         if (this.props.timerMinute === 0) {
@@ -29,6 +45,8 @@ class Timer extends React.Component {
             });
 
             this.props.toggle(this.state.isSession);
+
+            Vibration.vibrate(PATTERN);
           } else {
             this.setState({
               isSession: true,
@@ -69,11 +87,11 @@ class Timer extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <Text style={styles.textSession}>
           {this.state.isSession === true ? "Session" : "Break"}
         </Text>
-        <Text style={styles.textSession}>
+        <Text style={styles.textSessionNum}>
           <Text>{this.props.timerMinute}</Text>
           <Text> : </Text>
           <Text>
@@ -115,7 +133,7 @@ class Timer extends React.Component {
             <Text style={styles.text}>Restart</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </SafeAreaView>
     );
   }
 }
@@ -124,6 +142,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     justifyContent: "center",
+    marginTop: 40,
   },
   toStyleClickable: {
     backgroundColor: "#133dbd",
@@ -146,7 +165,10 @@ const styles = StyleSheet.create({
     fontSize: 17,
   },
   textSession: {
-    fontSize: 17,
+    fontSize: 35,
+  },
+  textSessionNum: {
+    fontSize: 25,
   },
   toView: {
     flexDirection: "row",

@@ -2,17 +2,30 @@ import React, { Component } from "react";
 import { StyleSheet, Text, View, Button, TouchableOpacity } from "react-native";
 
 export class Break extends Component {
+  constructor() {
+    super();
+
+    this.timer = null;
+    this.stopTimer = this.stopTimer.bind(this);
+  }
+
+  stopTimer() {
+    clearTimeout(this.timer);
+  }
+
   increaseBreak = () => {
     if (this.props.break === 60) {
       return;
     }
     this.props.increase();
+    this.timer = setTimeout(this.increaseBreak, 125);
   };
   decreaseBreak = () => {
     if (this.props.break === 1) {
       return;
     }
     this.props.decrease();
+    this.timer = setTimeout(this.decreaseBreak, 125);
   };
 
   render() {
@@ -27,7 +40,8 @@ export class Break extends Component {
                 ? styles.toStyleClickable
                 : styles.toStyleNot
             }
-            onPress={this.increaseBreak}
+            onPressIn={this.increaseBreak}
+            onPressOut={this.stopTimer}
             disabled={this.props.isPlay === true ? true : false}
           >
             <Text style={styles.text}>+</Text>
@@ -38,7 +52,8 @@ export class Break extends Component {
                 ? styles.toStyleClickable
                 : styles.toStyleNot
             }
-            onPress={this.decreaseBreak}
+            onPressIn={this.decreaseBreak}
+            onPressOut={this.stopTimer}
             disabled={this.props.isPlay === true ? true : false}
           >
             <Text style={styles.text}>–</Text>

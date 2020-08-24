@@ -72,6 +72,7 @@ const App = () => {
         decrease={decreaseBreak}
       />
       <Timer
+        style={styles.timer}
         isPlay={isPlay}
         timerMinute={timerMinute}
         breakTimer={breakDuration}
@@ -88,18 +89,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    paddingTop: 60,
+    paddingTop: 80,
     // alignItems: "center",
     // justifyContent: "center",
   },
   headerText: {
     color: "black",
-    fontSize: 30,
+    fontSize: 45,
     textAlign: "center",
+    fontWeight: "bold",
   },
   header: {
     height: 70,
-    padding: 15,
   },
 });
 
