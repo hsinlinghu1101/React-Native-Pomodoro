@@ -9,6 +9,8 @@ import {
   SafeAreaView,
 } from "react-native";
 
+
+ 
 class Timer extends React.Component {
   constructor() {
     super();
@@ -19,6 +21,7 @@ class Timer extends React.Component {
     };
   }
 
+   
   play = () => {
     let intervalid = setInterval(this.decreaseTimer, 1000);
     this.props.onPlayStopTimer(true);
@@ -145,7 +148,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   toStyleClickable: {
-    backgroundColor: "#133dbd",
+    backgroundColor: "#C66900",
     padding: 10,
     margin: 10,
     height: 45,

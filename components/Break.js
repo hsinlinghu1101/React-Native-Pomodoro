@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   toStyleClickable: {
-    backgroundColor: "#133dbd",
+    backgroundColor: "#C66900",
     padding: 10,
     margin: 10,
     height: 38,

@@ -21,16 +21,20 @@ class Session extends Component {
       return;
     }
     this.props.increase();
+    this.props.finalIncrease();
     this.timer = setTimeout(this.increaseSession, 125);
   };
+  
   decreaseSession = () => {
     if (this.props.session === 1) {
       return;
     }
     this.props.decrease();
+    this.props.finalDecrease();
     this.timer = setTimeout(this.decreaseSession, 125);
   };
-
+  
+  
   render() {
     return (
       <View style={styles.container}>
@@ -74,7 +78,7 @@ const styles = StyleSheet.create({
     margin: 20,
   },
   toStyleClickable: {
-    backgroundColor: "#133dbd",
+    backgroundColor: "#C66900",
     padding: 10,
     margin: 10,
     height: 38,
