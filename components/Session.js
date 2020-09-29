@@ -21,8 +21,8 @@ class Session extends Component {
       return;
     }
     this.props.increase();
-    this.props.finalIncrease();
     this.timer = setTimeout(this.increaseSession, 125);
+    
   };
   
   decreaseSession = () => {
@@ -30,8 +30,8 @@ class Session extends Component {
       return;
     }
     this.props.decrease();
-    this.props.finalDecrease();
     this.timer = setTimeout(this.decreaseSession, 125);
+   
   };
   
   
@@ -76,31 +76,38 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     margin: 20,
+    marginBottom: 40
   },
   toStyleClickable: {
-    backgroundColor: "#C66900",
-    padding: 10,
-    margin: 10,
-    height: 38,
-    width: 28,
+    backgroundColor: "#FF9800",
+    borderColor:"#C66900",
+    borderStyle:"solid",
+    borderWidth:3,
+    height: 50,
+    width :50,
+    borderRadius: 1000,
+    padding: 6,
+    marginHorizontal: 40,
+    marginTop:5
   },
   toStyleNot: {
     backgroundColor: "gray",
     padding: 10,
     margin: 10,
-    height: 38,
-    width: 28,
+    
   },
   text: {
     textAlign: "center",
     color: "white",
+    fontSize: 25
   },
   toView: {
     flexDirection: "row",
     justifyContent: "space-between",
   },
   sessionText: {
-    fontSize: 17,
+    fontSize: 25,
+    paddingTop: 10
   },
 });
 

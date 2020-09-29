@@ -15,12 +15,17 @@ const HomeScreen = () => {
       <Timer
         style={styles.timer}
         isPlay={time.isPlay}
+        onResetTrue={time.onResetTrue}
+        onResetFalse={time.onResetFalse}
         timerMinute={time.timerMinute}
-        breakTimer={time.breakTimen}
+        sessionTime={time.sessionTime}
+        breakTime={time.breakTime}
         updateTimerMinute={time.onUpdateTimeMinute}
         toggle={time.onToggleInterval}
         resetSession={time.onResetSession}
         onPlayStopTimer={time.onPlayStopTimer}
+        finalIncrease={time.finalIncreaseSession}
+        finalDecrease={time.finalDecreaseSession}
       />
       
     </View>

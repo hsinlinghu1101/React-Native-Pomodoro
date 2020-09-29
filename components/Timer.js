@@ -1,13 +1,6 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  TouchableOpacity,
-  Vibration,
-  SafeAreaView,
-} from "react-native";
+import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
+import {StyleSheet,Text,View,Button,TouchableOpacity,Vibration,SafeAreaView,Animated} from "react-native";
 
 
  
@@ -18,6 +11,7 @@ class Timer extends React.Component {
       isSession: true,
       timerSecond: 0,
       intervalid: 0,
+      key:0
     };
   }
 
@@ -27,7 +21,9 @@ class Timer extends React.Component {
     this.props.onPlayStopTimer(true);
     this.setState({
       intervalid: intervalid,
+      isSession:true
     });
+    this.props.onResetFalse();
   };
 
   decreaseTimer = () => {
@@ -80,11 +76,13 @@ class Timer extends React.Component {
 
   reset = () => {
     this.stop();
+    this.props.onResetTrue();
     this.props.resetSession();
     this.props.onPlayStopTimer(false);
     this.setState({
       timerSecond: 0,
       isSession: true,
+      key: this.state.key +1
     });
   };
 
@@ -92,9 +90,21 @@ class Timer extends React.Component {
     return (
       <SafeAreaView style={styles.container}>
         <Text style={styles.textSession}>
-          {this.state.isSession === true ? "Session" : "Break"}
+          {this.state.isSession ? "Session" : "Break"}
         </Text>
-        <Text style={styles.textSessionNum}>
+        {this.state.isSession &&
+        <CountdownCircleTimer
+          key={this.state.key}
+          size={250}
+          isPlaying={this.props.isPlay}
+          duration={this.props.sessionTime*60}
+          trailColor="#ffc947"
+          colors="#C66900"
+          >
+
+          {({ remainingTime}) => (
+            <Animated.Text style={{ color: "#000" }}>
+              <Text style={styles.textSessionNum}>
           <Text>{this.props.timerMinute}</Text>
           <Text> : </Text>
           <Text>
@@ -105,6 +115,35 @@ class Timer extends React.Component {
               : this.state.timerSecond}
           </Text>
         </Text>
+            </Animated.Text>
+          )}
+        </CountdownCircleTimer>}
+        {!this.state.isSession &&
+        <CountdownCircleTimer
+        isPlaying={this.props.isPlay}
+        duration={this.props.breakTime*60}
+        size={250}
+        trailColor="#d1ccbe"
+        colors="#ffc947"
+        >
+          
+        {({ remainingTime}) => (
+          <Animated.Text style={{ color: "#000" }}>
+            <Text style={styles.textSessionNum}>
+        <Text>{this.props.timerMinute}</Text>
+        <Text> : </Text>
+        <Text>
+          {this.state.timerSecond === 0
+            ? "00"
+            : this.state.timerSecond < 10
+            ? "0" + this.state.timerSecond
+            : this.state.timerSecond}
+        </Text>
+          <Text>no {remainingTime} {this.state.isSession}</Text>
+      </Text>
+          </Animated.Text>
+        )}
+          </CountdownCircleTimer>}
         <View style={styles.toView}>
           <TouchableOpacity
             onPress={this.play}
@@ -145,7 +184,6 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 40,
   },
   toStyleClickable: {
     backgroundColor: "#C66900",
@@ -169,6 +207,7 @@ const styles = StyleSheet.create({
   },
   textSession: {
     fontSize: 35,
+    marginBottom:20
   },
   textSessionNum: {
     fontSize: 25,
@@ -176,6 +215,7 @@ const styles = StyleSheet.create({
   toView: {
     flexDirection: "row",
     justifyContent: "space-between",
+    marginTop:20
   },
 });
 

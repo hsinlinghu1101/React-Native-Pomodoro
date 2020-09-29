@@ -4,12 +4,13 @@ export const TimeContext = React.createContext({
     breakTime:5,
     timerMinute:25,
     isPlay:false,
+    reset:false,
+    onRestTrue:()=>{},
+    onRestFalse:()=>{},
     increaseSession:()=>{},
     decreaseSession:()=>{},
     increaseBreak:()=>{},
     decreaseBreak:()=>{},
-    finalIncreaseSession:()=>{},
-    finalDecreaseSession:()=>{}
 });
 
 export default TimeContext
@@ -17,7 +18,7 @@ export default TimeContext
 export class TimeProvider extends Component{
     constructor(props) {
         super(props)
-        const state = { sessionTime: 25, breakTime: 5, timerMinute: 25, isPlay:false }
+        const state = { sessionTime: 25, breakTime: 5, timerMinute: 25, isPlay:false, reset:false }
     
         this.state = state;
       }
@@ -54,21 +55,25 @@ export class TimeProvider extends Component{
        onResetSession = () => {
         this.setState({timerMinute:this.state.sessionTime});
       };
-       finalIncreaseSession = () => {
-        this.setState({timerMinute:this.state.sessionTime +1 });
-      };
-      finalDecreaseSession = () => {
-        this.setState({timerMinute:this.state.sessionTime -1 });
-      };
+       
       onPlayStopTimer = (isPlayVar) => {
         this.setState({isPlay: isPlayVar});
       };
+      onResetTrue=()=>{
+        this.setState({reset: true})
+      }
+      onResetFalse=()=>{
+        this.setState({reset: false})
+      }
     render() {
         const value = {
           sessionTime: this.state.sessionTime,
           breakTime: this.state.breakTime,
           timerMinute: this.state.timerMinute,
           isPlay:this.state.isPlay,
+          reset:this.state.reset,
+          onResetTrue:this.onResetTrue,
+          onResetFalse: this.onResetFalse,
           increaseSession:this.increaseSession,
           decreaseSession: this.decreaseSession,
           increaseBreak:this.increaseBreak,
@@ -77,8 +82,7 @@ export class TimeProvider extends Component{
           onToggleInterval: this.onToggleInterval,
           onResetSession:this.onResetSession,
           onPlayStopTimer:this.onPlayStopTimer,
-          finalIncreaseSession:this.finalIncreaseSession,
-          finalDecreaseSession: this.finalDecreaseSession
+          
         }
 
 

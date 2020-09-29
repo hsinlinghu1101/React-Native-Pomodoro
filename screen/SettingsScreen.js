@@ -14,8 +14,7 @@ export default function SettingsScreen() {
       <Session
         isPlay={time.isPlay}
         session={time.sessionTime}
-        finalIncrease={time.finalIncreaseSession}
-        finalDecrease={time.finalDecreaseSession}
+        reset={time.reset}
         increase={time.increaseSession}
         decrease={time.decreaseSession}
       />
@@ -25,7 +24,7 @@ export default function SettingsScreen() {
         increase={time.increaseBreak}
         decrease={time.decreaseBreak}
       />
-      <Text>{time.increaseSession}</Text>
+      
         </View>
     )
 }
