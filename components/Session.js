@@ -67,7 +67,7 @@ class Session extends Component {
           </TouchableOpacity>
         </View>
       </View>
-    );
+    );git 
   }
 }
 

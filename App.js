@@ -10,13 +10,20 @@ import SettingsScreen from "./screen/SettingsScreen";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { TimeProvider } from './TimeContext'
 import Header from "./components/Header";
+
 const Tab = createMaterialBottomTabNavigator();
-export default function App() {
+
+
+export default class App extends React.Component {
+  
+  
+render(){
   return (
-    
     <TimeProvider>
     <NavigationContainer>
+      
       <Header/>
+      
       <Tab.Navigator
        initialRouteName="Home"
        activeColor="#FF9800"
@@ -42,10 +49,14 @@ export default function App() {
           ),
         }}/>  
        </Tab.Navigator>
+       
     </NavigationContainer>
     </TimeProvider>
+    
   );
 }
+}
+
 
 
 

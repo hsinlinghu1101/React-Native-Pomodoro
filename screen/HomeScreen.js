@@ -1,7 +1,7 @@
 
 import React, {  useContext } from "react";
 import { StyleSheet, View } from "react-native";
-
+import Music from "../components/Music";
 import Timer from "../components/Timer";
 import TimeContext from '../TimeContext'
 const HomeScreen = () => {
@@ -11,7 +11,7 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-  
+      <Music/>
       <Timer
         style={styles.timer}
         isPlay={time.isPlay}
@@ -36,8 +36,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    paddingTop: 50,
-    
+    paddingTop: 30,  
   }
 });
 

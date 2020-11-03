@@ -3,8 +3,8 @@ import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 import {StyleSheet,Text,View,Button,TouchableOpacity,Vibration,SafeAreaView,Animated} from "react-native";
 
 
- 
 class Timer extends React.Component {
+
   constructor() {
     super();
     this.state = {
@@ -24,6 +24,7 @@ class Timer extends React.Component {
       isSession:true
     });
     this.props.onResetFalse();
+    
   };
 
   decreaseTimer = () => {
@@ -72,9 +73,10 @@ class Timer extends React.Component {
   stop = () => {
     clearInterval(this.state.intervalid);
     this.props.onPlayStopTimer(false);
-  };
+  }
 
   reset = () => {
+    
     this.stop();
     this.props.onResetTrue();
     this.props.resetSession();
@@ -88,6 +90,7 @@ class Timer extends React.Component {
 
   render() {
     return (
+        
       <SafeAreaView style={styles.container}>
         <Text style={styles.textSession}>
           {this.state.isSession ? "Session" : "Break"}
@@ -176,6 +179,7 @@ class Timer extends React.Component {
           </TouchableOpacity>
         </View>
       </SafeAreaView>
+      
     );
   }
 }
