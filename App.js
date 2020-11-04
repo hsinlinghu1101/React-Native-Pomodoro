@@ -5,7 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import HomeScreen from "./screen/HomeScreen";
-import DataScreen from "./screen/DataScreen";
+import MusicScreen from "./screen/MusicScreen";
 import SettingsScreen from "./screen/SettingsScreen";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { TimeProvider } from './TimeContext'
@@ -36,10 +36,10 @@ render(){
             <MaterialCommunityIcons name="home" color={color} size={26} />
           ),
         }}/>    
-        <Tab.Screen name="Data" component={DataScreen} options={{
-          tabBarLabel: 'Data',
+        <Tab.Screen name="Music" component={MusicScreen} options={{
+          tabBarLabel: 'Music',
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="chart-pie" color={color} size={26} />
+            <MaterialCommunityIcons name="music" color={color} size={26} />
           ),
         }}/>
         <Tab.Screen name="Settings" component={SettingsScreen} options={{
